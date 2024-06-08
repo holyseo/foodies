@@ -1,5 +1,6 @@
 import express from "express";
 import multer from "multer";
+import cloudinary from "cloudinary";
 import {
   addFood,
   listFood,
@@ -8,12 +9,20 @@ import {
 
 const foodRouter = express.Router();
 
-const storage = multer.diskStorage({
-  destination: "uploads",
-  filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`);
-  },
+cloudinary.v2.config({
+  cloud_name: "dauqaayos",
+  api_key: "234645116783126",
+  api_secret: "ElnkVU7wUVRdyVnwVCjPoq-uU3Y",
 });
+
+// const storage = multer.diskStorage({
+//   destination: "uploads",
+//   filename: (req, file, cb) => {
+//     return cb(null, `${Date.now()}${file.originalname}`);
+//   },
+// });
+
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage });
 
