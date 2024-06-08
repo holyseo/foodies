@@ -17,13 +17,16 @@ const addFood = async (req, res) => {
     stream.pipe(uploadStream);
   });
 
+import fs from "fs";
+
+const addFood = async (req, res) => {
+  let image_filename = `${req.file.filename}`;
+  console.log(req.file);
   const food = new foodModel({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    // image: image_filename,
-    image: result.secure_url,
-    cloudinary_id: result.public_id,
+    image: image_filename,
     category: req.body.category,
   });
   try {
@@ -47,8 +50,13 @@ const listFood = async (req, res) => {
 
 const removeFood = async (req, res) => {
   try {
+<<<<<<< HEAD
     // const food = await foodModel.findById(req.body.id);
     // fs.unlink(`uploads/${food.image}`, () => {});
+=======
+    const food = await foodModel.findById(req.body.id);
+    fs.unlink(`uploads/${food.image}`, () => {});
+>>>>>>> origin/main
     await foodModel.findByIdAndDelete(req.body.id);
     res.json({ success: true, message: "Food removed" });
   } catch (error) {
