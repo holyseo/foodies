@@ -11,7 +11,14 @@ const app = express();
 const port = 4000;
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+const corsOptions = {
+  origin: "https://foodie-fe.netlify.app",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 connectDB();
 
